@@ -56,13 +56,7 @@ RUN groupadd --system --gid 1000 rails && \
 USER 1000:1000
 
 # Entrypoint prepares the database.
-COPY docker-entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/docker-entrypoint.sh
-
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
-
-
-
