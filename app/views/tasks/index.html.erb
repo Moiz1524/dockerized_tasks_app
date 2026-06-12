@@ -1,0 +1,44 @@
+<% content_for :title, "Tasks" %>
+
+<div class="w-full max-w-3xl mx-auto">
+  <%# Header %>
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Tasks</h1>
+      <p class="text-sm text-gray-500 mt-0.5"><%= pluralize(@tasks.size, "task") %></p>
+    </div>
+    <%= link_to new_task_path,
+          data: { turbo_frame: "new_task_frame" },
+          class: "inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 active:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition" do %>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      New Task
+    <% end %>
+  </div>
+
+  <%# Inline new-task form (hidden until "New Task" is clicked) %>
+  <%= turbo_frame_tag "new_task_frame" do %>
+  <% end %>
+
+  <%# Flash messages %>
+  <% if notice.present? %>
+    <div id="flash_notice"
+         data-controller="flash"
+         class="mb-4 flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm px-4 py-3 rounded-lg">
+      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <%# Task list %>
+  <div id="tasks_list" class="space-y-3">
+    <% if @tasks.empty? %>
+      <div id="tasks_empty" class="text-center py-16 text-gray-400">
+        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        <p class="font-medium">No tasks yet</p>
+        <p class="text-sm mt-1">Click <span class="font-semibold">New Task</span> to get started.</p>
+      </div>
+    <% else %>
+      <%= render @tasks %>
+    <% end %>
+  </div>
+</div>

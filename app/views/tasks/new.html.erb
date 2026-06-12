@@ -1,0 +1,7 @@
+<% content_for :title, "New Task" %>
+
+<%= turbo_frame_tag "new_task_frame" do %>
+  <div class="mb-6">
+    <%= render "form", task: @task %>
+  </div>
+<% end %>

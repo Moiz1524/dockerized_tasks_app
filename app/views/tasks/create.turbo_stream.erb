@@ -1,0 +1,10 @@
+<%# Prepend the new task to the list %>
+<%= turbo_stream.prepend "tasks_list", partial: "tasks/task", locals: { task: @task } %>
+
+<%# Remove the empty state if it exists %>
+<%= turbo_stream.remove "tasks_empty" %>
+
+<%# Reset the new-task frame back to empty %>
+<%= turbo_stream.replace "new_task_frame" do %>
+  <%= turbo_frame_tag "new_task_frame" %>
+<% end %>

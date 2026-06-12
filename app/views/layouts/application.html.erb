@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-50">
+  <head>
+    <title><%= content_for(:title).present? ? "#{content_for(:title)} — TaskBoard" : "TaskBoard" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="TaskBoard">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full flex flex-col">
+    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
+      <div class="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
+        <%= link_to root_path, class: "flex items-center gap-2 text-gray-900 font-bold text-lg hover:text-indigo-600 transition" do %>
+          <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+          </svg>
+          TaskBoard
+        <% end %>
+        <span class="text-xs text-gray-400 hidden sm:block">Hotwire + Stimulus</span>
+      </div>
+    </nav>
+
+    <main class="flex-1 py-8 px-5">
+      <%= yield %>
+    </main>
+  </body>
+</html>

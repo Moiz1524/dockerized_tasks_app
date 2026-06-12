@@ -1,0 +1,15 @@
+<h1>New Task Created</h1>
+
+<p>A new task has been created with the following details:</p>
+
+<ul>
+  <li><strong>Title:</strong> <%= @task.title %></li>
+  <li><strong>Status:</strong> <%= @task.status %></li>
+  <li><strong>Priority:</strong> <%= @task.priority %></li>
+  <% if @task.description.present? %>
+    <li><strong>Description:</strong> <%= @task.description %></li>
+  <% end %>
+  <% if @task.due_date.present? %>
+    <li><strong>Due Date:</strong> <%= @task.due_date.strftime("%B %d, %Y") %></li>
+  <% end %>
+</ul>
